@@ -6,8 +6,8 @@
  * complete automatically (confident) or prompt the user to confirm (ambiguous).
  */
 
-import type { Activity, Session } from "../types/domain.js";
-import type { SessionType } from "../types/prescription.js";
+import type { Activity, Session } from "../types/domain";
+import type { SessionType } from "../types/prescription";
 
 export type MatchConfidence = "confident" | "ambiguous" | "none";
 

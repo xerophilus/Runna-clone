@@ -11,7 +11,7 @@
  * Deterministic: same inputs → same day assignment.
  */
 
-import type { Phase, Weekday } from "../types/domain.js";
+import type { Phase, Weekday } from "../types/domain";
 
 export const WEEK_ORDER: Weekday[] = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 

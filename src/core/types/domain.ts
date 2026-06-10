@@ -7,7 +7,7 @@
  * fitness_baseline, etc.).
  */
 
-import type { Prescription, SessionType } from "./prescription.js";
+import type { Prescription, SessionType } from "./prescription";
 
 export type Units = "metric" | "imperial";
 

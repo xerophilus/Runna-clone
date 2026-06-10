@@ -14,10 +14,10 @@ import type {
   StrengthPrescription,
   RuckPrescription,
   RestPrescription,
-} from "../types/prescription.js";
-import type { Equipment, LiftMaxes } from "../types/domain.js";
-import type { TrainingPaces, PaceRange } from "./vdot.js";
-import { midPace } from "./vdot.js";
+} from "../types/prescription";
+import type { Equipment, LiftMaxes } from "../types/domain";
+import type { TrainingPaces, PaceRange } from "./vdot";
+import { midPace } from "./vdot";
 
 const WARMUP_M = 1600;
 const COOLDOWN_M = 1200;

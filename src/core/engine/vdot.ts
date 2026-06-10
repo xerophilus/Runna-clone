@@ -18,7 +18,7 @@
  * logged data (§10 "VDOT cold-start").
  */
 
-import type { EngineConfig } from "./config.js";
+import type { EngineConfig } from "./config";
 
 const A = 0.000104;
 const B = 0.182258;

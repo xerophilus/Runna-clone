@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { generatePlan, type GeneratePlanInput } from "../generatePlan.js";
-import { DEFAULT_CONFIG } from "../config.js";
-import type { Goal } from "../../types/domain.js";
+import { generatePlan, type GeneratePlanInput } from "../generatePlan";
+import { DEFAULT_CONFIG } from "../config";
+import type { Goal } from "../../types/domain";
 
 const raceGoal: Goal = {
   id: "goal-1",

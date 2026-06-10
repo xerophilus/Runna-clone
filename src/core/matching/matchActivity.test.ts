@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { matchActivity } from "./matchActivity.js";
-import type { Activity, Session } from "../types/domain.js";
+import { matchActivity } from "./matchActivity";
+import type { Activity, Session } from "../types/domain";
 
 function runSession(id: string, date: string, distanceM: number): Session {
   return {

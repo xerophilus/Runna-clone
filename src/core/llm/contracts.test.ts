@@ -6,8 +6,8 @@ import {
   templateCopy,
   validateAdjustment,
   adjustmentToReflow,
-} from "./contracts.js";
-import type { RunPrescription, StrengthPrescription } from "../types/prescription.js";
+} from "./contracts";
+import type { RunPrescription, StrengthPrescription } from "../types/prescription";
 
 const run: RunPrescription = {
   type: "run",

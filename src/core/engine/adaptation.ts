@@ -21,10 +21,10 @@ import type {
   TargetVolume,
   Week,
   WeekVolumeDelta,
-} from "../types/domain.js";
-import { DEFAULT_CONFIG, type EngineConfig } from "./config.js";
-import { generatePlan, resolveVdot, type GeneratePlanInput } from "./generatePlan.js";
-import { addDays, diffDays } from "./dates.js";
+} from "../types/domain";
+import { DEFAULT_CONFIG, type EngineConfig } from "./config";
+import { generatePlan, resolveVdot, type GeneratePlanInput } from "./generatePlan";
+import { addDays, diffDays } from "./dates";
 
 // ---------------------------------------------------------------------------
 // Trigger detection

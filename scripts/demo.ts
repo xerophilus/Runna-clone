@@ -7,11 +7,11 @@
  * without any UI.
  */
 
-import { generatePlan, type GeneratePlanInput } from "../src/core/engine/generatePlan.js";
-import { pacesFromVdot } from "../src/core/engine/vdot.js";
-import { DEFAULT_CONFIG } from "../src/core/engine/config.js";
-import { finalizeCopy } from "../src/core/llm/contracts.js";
-import type { Goal } from "../src/core/types/domain.js";
+import { generatePlan, type GeneratePlanInput } from "../src/core/engine/generatePlan";
+import { pacesFromVdot } from "../src/core/engine/vdot";
+import { DEFAULT_CONFIG } from "../src/core/engine/config";
+import { finalizeCopy } from "../src/core/llm/contracts";
+import type { Goal } from "../src/core/types/domain";
 
 const goal: Goal = {
   id: "demo-goal",

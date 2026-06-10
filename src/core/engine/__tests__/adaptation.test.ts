@@ -1,13 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { generatePlan, type GeneratePlanInput } from "../generatePlan.js";
-import { DEFAULT_CONFIG } from "../config.js";
+import { generatePlan, type GeneratePlanInput } from "../generatePlan";
+import { DEFAULT_CONFIG } from "../config";
 import {
   countMisses,
   detectTrigger,
   reflowPlan,
   isKeySession,
-} from "../adaptation.js";
-import type { Goal, Plan } from "../../types/domain.js";
+} from "../adaptation";
+import type { Goal, Plan } from "../../types/domain";
 
 const goal: Goal = {
   id: "goal-1",

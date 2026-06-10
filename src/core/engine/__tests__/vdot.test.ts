@@ -1,12 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { DEFAULT_CONFIG } from "../config.js";
+import { DEFAULT_CONFIG } from "../config";
 import {
   vdotFromRace,
   vdotFromEasyPace,
   pacesFromVdot,
   velocityFromVo2,
   vo2FromVelocity,
-} from "../vdot.js";
+} from "../vdot";
 
 describe("VDOT computation", () => {
   it("recovers a plausible VDOT from a 5k race", () => {

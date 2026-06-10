@@ -23,13 +23,13 @@ import type {
   Weekday,
   RaceDetail,
   TargetVolume,
-} from "../types/domain.js";
-import type { Prescription } from "../types/prescription.js";
-import { DEFAULT_CONFIG, ENGINE_VERSION, type EngineConfig } from "./config.js";
-import { pacesFromVdot, type TrainingPaces } from "./vdot.js";
-import { allocateMaintenancePhases, allocateRacePhases } from "./phases.js";
-import { buildVolumeProgression, type WeekVolumePlan } from "./volume.js";
-import { scheduleWeek, WEEK_ORDER, type SessionSlot } from "./scheduling.js";
+} from "../types/domain";
+import type { Prescription } from "../types/prescription";
+import { DEFAULT_CONFIG, ENGINE_VERSION, type EngineConfig } from "./config";
+import { pacesFromVdot, type TrainingPaces } from "./vdot";
+import { allocateMaintenancePhases, allocateRacePhases } from "./phases";
+import { buildVolumeProgression, type WeekVolumePlan } from "./volume";
+import { scheduleWeek, WEEK_ORDER, type SessionSlot } from "./scheduling";
 import {
   buildEasyRun,
   buildIntervalRun,
@@ -37,8 +37,8 @@ import {
   buildRuckSession,
   buildStrengthSession,
   buildThresholdRun,
-} from "./prescriptions.js";
-import { addDays, mondayOnOrBefore } from "./dates.js";
+} from "./prescriptions";
+import { addDays, mondayOnOrBefore } from "./dates";
 
 /** Cold-start VDOT when the user provides no fitness data (deliberately low). */
 export const COLD_START_VDOT = 38;

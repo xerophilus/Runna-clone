@@ -10,8 +10,8 @@
  * distance. The result always sums to exactly `weeks`.
  */
 
-import type { EngineConfig } from "./config.js";
-import type { PhaseSpan } from "../types/domain.js";
+import type { EngineConfig } from "./config";
+import type { PhaseSpan } from "../types/domain";
 
 /** Taper length scales with race distance: longer races taper longer. */
 export function taperWeeksForDistance(

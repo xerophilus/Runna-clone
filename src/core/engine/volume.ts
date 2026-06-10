@@ -12,8 +12,8 @@
  * just applies whatever it's given, which keeps it testable and tunable.
  */
 
-import type { EngineConfig } from "./config.js";
-import type { Phase, PhaseSpan } from "../types/domain.js";
+import type { EngineConfig } from "./config";
+import type { Phase, PhaseSpan } from "../types/domain";
 
 export interface WeekVolumePlan {
   week_index: number;

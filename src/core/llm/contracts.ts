@@ -11,7 +11,7 @@
  * unit-tested. The actual Anthropic call lives in the Edge Function.
  */
 
-import type { Prescription } from "../types/prescription.js";
+import type { Prescription } from "../types/prescription";
 
 // ---------------------------------------------------------------------------
 // Task 1: session copywriting  (prescription → display copy)

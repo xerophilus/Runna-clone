@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { scheduleWeek, WEEK_ORDER, type SessionSlot } from "../scheduling.js";
-import type { Weekday } from "../../types/domain.js";
+import { scheduleWeek, WEEK_ORDER, type SessionSlot } from "../scheduling";
+import type { Weekday } from "../../types/domain";
 
 const HARD = new Set(["long", "quality_threshold", "quality_interval"]);
 

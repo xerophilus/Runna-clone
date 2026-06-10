@@ -15,11 +15,20 @@ proposes; the rules engine disposes.
 
 ## What's in this repository
 
-This is the **load-bearing core** the rest of the product builds on — Build
-Sequence steps 1–3 plus the testable slices of 5, 8, and 9 (spec §8). It is fully
-typed, deterministic, and unit-tested; there is no UI shell yet (see Status below).
+An Expo (SDK 56) / React Native app over a deterministic, unit-tested
+periodization engine. The engine came first (it's the make-or-break, spec §10);
+the app shell — auth, onboarding, plan display, manual logging — renders and
+drives it.
 
 ```
+app/                    # expo-router routes
+  (auth)/sign-in        # email/password auth + zero-setup demo mode
+  (onboarding)/         # goal → fitness → availability → generate (spec §5.1)
+  (tabs)/               # Today / Plan / Progress (spec §5.3, §5.6)
+  session/[id]          # expanded session + manual logging (spec §5.3–5.4)
+src/lib/                # supabase client, formatting (units-aware), persistence repo
+src/stores/             # zustand: auth, onboarding, plan
+src/components/         # UI primitives + session cards
 src/core/
   types/
     prescription.ts     # The Session Prescription Schema (spec §6) — discriminated union
@@ -48,10 +57,18 @@ scripts/demo.ts         # prints a generated marathon plan to eyeball periodizat
 
 ```bash
 npm install
+npm start         # Expo dev server — press i / a / w for iOS / Android / web
 npm test          # 72 unit tests across the engine, contracts, and matching
 npm run typecheck # strict TypeScript, no errors
-npm run demo      # generate + print a 16-week marathon plan
+npm run demo      # generate + print a 16-week marathon plan in the terminal
 ```
+
+No Supabase project configured? The app still works: **demo mode** generates
+plans locally with the same engine, skipping persistence — the whole product is
+explorable with zero setup. To run for real, copy `.env.example` to `.env`, fill
+in `EXPO_PUBLIC_SUPABASE_URL` / `EXPO_PUBLIC_SUPABASE_ANON_KEY`, apply
+`supabase/migrations/0001_initial_schema.sql`, and set `ANTHROPIC_API_KEY` as an
+Edge Function secret.
 
 `npm run demo` output (abridged) shows the engine producing a coherent, periodized
 block — capped ~10%/week ramps, a deload every 4th week, a distance-scaled taper,
@@ -91,20 +108,21 @@ hard/easy spacing, and VDOT-derived pace ranges:
 
 | # | Step | State |
 |---|------|-------|
-| 1 | Project scaffold + Auth | DB schema + RLS done; Expo/Auth shell pending |
-| 2 | Onboarding flow | domain types + inputs modeled; UI pending |
+| 1 | Project scaffold + Auth | **done** — Expo app, Supabase auth, demo mode; telemetry is a seam (`src/lib/telemetry.ts`) awaiting Sentry/PostHog keys |
+| 2 | Onboarding flow | **done** — goal → fitness → availability → generate, persists `users`/`goals`, soft feasibility warning |
 | 3 | **Rules engine (static plans)** | **done, unit-tested** |
-| 4 | Workout display | renders from prescriptions; UI pending |
-| 5 | LLM session copywriting | Edge Function + guardrails done; client wiring pending |
-| 6 | Manual logging | domain modeled; UI pending |
+| 4 | Workout display | **done** — today card, expanded session, week dots, phase/volume plan timeline |
+| 5 | LLM session copywriting | Edge Function + guardrails done; client wiring pending (UI falls back to deterministic titles/notes) |
+| 6 | Manual logging | **done** — complete/skip + effort flag + RPE, optimistic update + rollback |
 | 7 | HealthKit sync | matching logic done, unit-tested; native bridge pending |
-| 8 | **Adaptive re-planning** | **engine + diff + consent done, unit-tested** |
+| 8 | **Adaptive re-planning** | **engine + diff + consent done, unit-tested**; trigger wiring + review screen pending |
 | 9 | NL adjustment parsing | Edge Function + contract done |
-| 10 | Dashboard | pending |
+| 10 | Dashboard | basic version done — adherence, streak, weekly done-vs-plan volume, readiness |
 
-The next slice is the Expo/React Native app shell (Build Sequence step 1): auth,
-onboarding screens persisting to Supabase, and rendering the generated plan from
-the engine that already exists here.
+Verified: `tsc` clean, 72 tests green, and `expo export` bundles for both web
+and iOS (Hermes). Next slices: wire `session-copy` into generation, the
+adaptation trigger check + consent review screen (engine support already
+exists), then the HealthKit bridge.
 
 ## Open product decisions (spec §10, "Decisions to make before step 3")
 

@@ -1,10 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { DEFAULT_CONFIG } from "../config.js";
+import { DEFAULT_CONFIG } from "../config";
 import {
   allocateRacePhases,
   allocateMaintenancePhases,
   taperWeeksForDistance,
-} from "../phases.js";
+} from "../phases";
 
 const sum = (spans: { week_count: number }[]) =>
   spans.reduce((a, s) => a + s.week_count, 0);

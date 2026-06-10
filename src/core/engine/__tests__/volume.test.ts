@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { DEFAULT_CONFIG } from "../config.js";
-import { allocateRacePhases } from "../phases.js";
-import { buildVolumeProgression } from "../volume.js";
+import { DEFAULT_CONFIG } from "../config";
+import { allocateRacePhases } from "../phases";
+import { buildVolumeProgression } from "../volume";
 
 const config = DEFAULT_CONFIG;
 
