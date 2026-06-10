@@ -112,17 +112,23 @@ hard/easy spacing, and VDOT-derived pace ranges:
 | 2 | Onboarding flow | **done** — goal → fitness → availability → generate, persists `users`/`goals`, soft feasibility warning |
 | 3 | **Rules engine (static plans)** | **done, unit-tested** |
 | 4 | Workout display | **done** — today card, expanded session, week dots, phase/volume plan timeline |
-| 5 | LLM session copywriting | Edge Function + guardrails done; client wiring pending (UI falls back to deterministic titles/notes) |
+| 5 | LLM session copywriting | **done** — Edge Function + client hydration with the number-drift guard re-run client-side; deterministic fallback when unreachable |
 | 6 | Manual logging | **done** — complete/skip + effort flag + RPE, optimistic update + rollback |
 | 7 | HealthKit sync | matching logic done, unit-tested; native bridge pending |
-| 8 | **Adaptive re-planning** | **engine + diff + consent done, unit-tested**; trigger wiring + review screen pending |
-| 9 | NL adjustment parsing | Edge Function + contract done |
+| 8 | **Adaptive re-planning** | **done end-to-end** — trigger detection on load (banner), manual "dial it back", proposal → consent review screen showing the week-by-week diff, persistence as a superseded/new plan version + adaptation row |
+| 9 | NL adjustment parsing | **done** — "talk to your plan" input on the Plan tab; Edge Function parse with a narrow keyword fallback (demo mode), clarify-don't-guess |
 | 10 | Dashboard | basic version done — adherence, streak, weekly done-vs-plan volume, readiness |
 
-Verified: `tsc` clean, 72 tests green, and `expo export` bundles for both web
-and iOS (Hermes). Next slices: wire `session-copy` into generation, the
-adaptation trigger check + consent review screen (engine support already
-exists), then the HealthKit bridge.
+Verified: `tsc` clean, 87 tests green, and `expo export` bundles for both web
+and iOS (Hermes). The remaining gap to the MVP ship line (spec §8, after step 8)
+is the HealthKit native bridge — the matching logic it feeds is already built
+and tested.
+
+Worth knowing about the adaptation wiring: reflows never touch elapsed weeks
+*or the elapsed part of the current week* — once a week is underway, changes
+apply from next Monday (`reflowFromIndex`). Plans generated mid-week drop the
+already-past days of week 0 so they don't instantly read as "missed"
+(`dropPreStartSessions`).
 
 ## Open product decisions (spec §10, "Decisions to make before step 3")
 

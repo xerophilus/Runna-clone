@@ -181,6 +181,31 @@ export async function loadActivePlan(userId: string): Promise<Plan | null> {
   };
 }
 
+/** Mark a plan superseded after an accepted reflow (spec §5.5). */
+export async function supersedePlan(planId: string): Promise<void> {
+  const { error } = await supabase
+    .from("plans")
+    .update({ status: "superseded" })
+    .eq("id", planId);
+  if (error) throw error;
+}
+
+/** Record a re-plan event: what triggered it, what changed, the rationale. */
+export async function insertAdaptation(args: {
+  planId: string;
+  trigger: string;
+  summary: string;
+  changes: unknown;
+}): Promise<void> {
+  const { error } = await supabase.from("adaptations").insert({
+    plan_id: args.planId,
+    trigger: args.trigger,
+    summary: args.summary,
+    changes: args.changes,
+  });
+  if (error) throw error;
+}
+
 /** Manual logging (spec §5.4): mark complete/skipped and record an activity. */
 export async function logSession(args: {
   userId: string;

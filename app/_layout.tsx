@@ -21,6 +21,17 @@ export default function RootLayout() {
         <Stack.Screen name="(onboarding)" />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen
+          name="adaptation-review"
+          options={{
+            headerShown: true,
+            headerTitle: "",
+            headerBackTitle: "Back",
+            headerTintColor: "#C2572B",
+            headerStyle: { backgroundColor: "#FAF7F2" },
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
           name="session/[id]"
           options={{
             headerShown: true,

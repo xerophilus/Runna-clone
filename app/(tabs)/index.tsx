@@ -3,12 +3,21 @@
  * at a glance with status dots.
  */
 
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { Screen, SectionLabel, Title, Card } from "@/components/ui";
 import { SessionCard, StatusDot } from "@/components/SessionCard";
 import { usePlanStore } from "@/stores/planStore";
+import { useAdaptation } from "@/lib/useAdaptation";
 import { formatDateLong, localTodayISO } from "@/lib/format";
-import type { Session, Week } from "@/core/types/domain";
+import type { AdaptationTrigger, Session, Week } from "@/core/types/domain";
+
+const BANNER_COPY: Record<AdaptationTrigger, string> = {
+  missed_sessions: "A few sessions slipped recently. Want the plan to absorb them?",
+  underperformance: "Sessions have been running harder than prescribed. Recalibrate?",
+  manual_fatigue: "You flagged fatigue. Review the easier block?",
+  user_request: "You asked for a change. Review it?",
+};
 
 /** The week whose date span contains today, else the next upcoming week. */
 function weekContaining(weeks: Week[], dateISO: string): Week | undefined {
@@ -24,6 +33,7 @@ function weekContaining(weeks: Week[], dateISO: string): Week | undefined {
 export default function TodayScreen() {
   const plan = usePlanStore((s) => s.plan);
   const units = usePlanStore((s) => s.units);
+  const { activeBanner, proposeAndReview, busy } = useAdaptation();
   if (!plan) return null;
 
   const today = localTodayISO();
@@ -38,6 +48,20 @@ export default function TodayScreen() {
     <Screen>
       <Title>Today</Title>
       <Text className="text-base text-slate mb-4">{formatDateLong(today)}</Text>
+
+      {activeBanner ? (
+        <Pressable
+          onPress={() => void proposeAndReview(activeBanner).catch(() => {})}
+          disabled={busy}
+          className="bg-accentSoft border border-accent/30 rounded-2xl p-4 mb-4 flex-row items-center active:opacity-80"
+        >
+          <Ionicons name="sparkles" size={18} color="#C2572B" />
+          <Text className="flex-1 text-sm text-ink ml-3 leading-5">
+            {BANNER_COPY[activeBanner]}
+          </Text>
+          <Text className="text-sm font-semibold text-accent ml-2">Review</Text>
+        </Pressable>
+      ) : null}
 
       {todaySessions.length > 0 ? (
         todaySessions.map((s) => <SessionCard key={s.id} session={s} units={units} big />)
